@@ -17,10 +17,8 @@ console.log(process.env.JWT_PASSWORD, "-----jwt password-----");
 
 // Route imports
 const authRouter = require('./routes/authRouter'); 
-const jobsRouter = require('./routes/jobsRouter'); 
-const userRouter = require('./routes/userRouter');
-const studentRouter = require('./routes/studentRouter');
-const notificationRouter =require('./routes/notificationRouter');
+const tripRouter = require('./routes/tripRouter'); 
+
 
 const  app = express();
 
@@ -43,10 +41,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use(authRouter);
-app.use(jobsRouter);
-app.use(userRouter);
-app.use(studentRouter);
-app.use(notificationRouter);
+app.use(tripRouter);
+
 
 
 

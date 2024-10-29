@@ -9,10 +9,7 @@ const userSchema = mongoose.Schema({
     CompanyName: {
         type: String,
     },
-    RegistrationNumber: {
-        type: String,
-        required: true
-    },
+   
     Email: {
         type: String,
         required: true
@@ -33,9 +30,7 @@ const userSchema = mongoose.Schema({
     Industry: {
         type: String
     },
-    Incorporationdate: {
-        type: Date,
-    },
+ 
     About: {
         type: String,
     },
