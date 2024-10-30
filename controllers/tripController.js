@@ -1,42 +1,34 @@
-const JOBS = require('../models/JobModels');
+const TRIPS = require('../models/TripModels');
 const mongoose = require('mongoose');
 
 
 
 
-// Add Jobs
+// Add Trip
 
 
 exports.Addtrip = async (req, res) => {
     try {
         const {
-            CreatedBy, JobTitle, Experience, Location, Qualifications, EmploymentType, Openings, Date, Salary, status, Description, Keyskills,
+            TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount
         } = req.body;
 
-
-        const newJob = new JOBS({
-            CreatedBy, JobTitle, Experience, Location, Qualifications, EmploymentType, Openings, Date, Salary, status, Description, Keyskills,
-        });
-        await newJob.save();
-
-        // Generate a notification
-                // Fetch student user IDs
-
-                const students = await STUDENT.find({Role:"2"});
-                const studentUserIds = students.map(students=>students._id)
-
-                const notification = new Notification({
-                    title: 'New Job Posted',
-                    message: `A new job has been posted: ${newJob.JobTitle}`,
-                    student: studentUserIds, // Assuming you have a way to identify students
-                    // date: '2024-08-27T00:00:00Z',  // Hardcoded date for testing
-                    Date: new global.Date(),  // Use global.Date if necessary
-
-                });
+        const { TripFile } = req.files;
         
-                await notification.save();
+        if (req.files) {
+            if (TripFile && TripFile[0]) {
+                userData.TripFile = TripFile[0].filename;
+            }
+        }
 
-                res.status(201).json({ message: 'Job added and notification sent successfully', job: newJob });
+
+        const newTrip = new TRIPS({
+            TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, TripFile
+        });
+
+        await newTrip.save();
+
+                res.status(201).json({ message: 'trip data Added successfully', job: newTrip });
 
     } catch (error) {
         console.log(error);
