@@ -10,25 +10,29 @@ const mongoose = require('mongoose');
 exports.Addtrip = async (req, res) => {
     try {
         const {
-            TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount
+            CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status,
         } = req.body;
 
         const { TripFile } = req.files;
-        
-        if (req.files) {
-            if (TripFile && TripFile[0]) {
-                userData.TripFile = TripFile[0].filename;
-            }
+
+
+       
+
+        let tripFileName = '';
+        if (req.files && TripFile && TripFile[0]) {
+            tripFileName = TripFile[0].filename; // Store the filename directly
         }
 
-
         const newTrip = new TRIPS({
-            TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, TripFile
+            CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status, TripFile :tripFileName, 
         });
 
         await newTrip.save();
 
-                res.status(201).json({ message: 'trip data Added successfully', job: newTrip });
+        console.log(newTrip);
+
+
+        res.status(201).json({ message: 'trip data Added successfully', job: newTrip });
 
     } catch (error) {
         console.log(error);

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
-
 const tripSchema = new mongoose.Schema({
+
+    CreatedBy: {
+        type:String,
+    },
+
     TripTitle: {
         type: String,
     },
@@ -32,7 +36,21 @@ const tripSchema = new mongoose.Schema({
     TripFile: {
         type: String
     },
-  
+
+    status: {
+        type: String,
+        required: true,
+        default: "active", // Use "active" or "inactive"
+    },
+    
+
+    CreatedBy: {
+        type: mongoose.Types.ObjectId,
+        ref: 'users',
+    },
+    
+
+
 
 });
 
