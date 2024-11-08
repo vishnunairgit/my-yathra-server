@@ -13,18 +13,39 @@ exports.Addtrip = async (req, res) => {
             CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status,
         } = req.body;
 
-        const { TripFile } = req.files;
+
+        const { TripFile} = req.files;
+
+        let tripFileName = '';
+
+
+        if (TripFile && TripFile[0]) {
+            tripFileName = TripFile[0].filename; // Get filename from uploaded file
+        }
+
+        const createdById = mongoose.Types.ObjectId(CreatedBy);
+
+
+
+        // let TripFile = null; // Initialize TripFile to null
+
+        // if (req.files && req.files.TripFile && req.files.TripFile[0]) {
+        //     TripFile = req.files.TripFile[0].filename; // Set TripFile if it exists
+        // }
+
 
 
        
 
-        let tripFileName = '';
-        if (req.files && TripFile && TripFile[0]) {
-            tripFileName = TripFile[0].filename; // Store the filename directly
-        }
+        // let tripFileName = '';
+
+        // if (req.files && TripFile && TripFile[0]) {
+        //     tripFileName = TripFile[0].filename; // Store the filename directly
+        // }
+
 
         const newTrip = new TRIPS({
-            CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status, TripFile :tripFileName, 
+            CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status, TripFile:tripFileName, 
         });
 
         await newTrip.save();
