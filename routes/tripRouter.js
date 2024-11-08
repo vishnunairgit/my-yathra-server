@@ -8,6 +8,9 @@ const upload = require('../config/multerConfig');
 // POST /api/jobs/Addjob
 router.post('/AddTrip', upload , tripController.Addtrip);
 
+router.get('/GetTrips', tripController.GetTrips);
+
+
 
 
 

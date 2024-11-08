@@ -1,6 +1,5 @@
 
 const multer = require('multer');
-
 const fileStorage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, 'public/UserFiles');
@@ -14,12 +13,6 @@ const upload = multer({ storage: fileStorage }).fields([
     { name: 'TripFile', maxCount: 1 },
 
 ]);
-
-
-
-
-
-
 
 module.exports = upload;
 
