@@ -1,10 +1,60 @@
+// const mongoose = require('mongoose');
+// const tripSchema = new mongoose.Schema({
+
+//     TripTitle: {
+//         type: String,
+//     },
+//     TripLocations: {
+//         type: String,
+//     },
+//     TripDuration: {
+//         type: String,
+//     },
+//     Flights: {
+//         type: String,
+//     },
+//     Date: {
+//         type: Date,
+//         default: Date.now
+//     },
+//     Hotels: {
+//         type: String,
+//     },
+//     Activities: {
+//         type: String,
+//     },
+//     TripAmount: {
+//         type: Number,
+//     },
+//     TripDiscountAmount: {
+//         type: Number,
+//     },
+//     TripFile: {
+//         type: String
+//     },
+
+//     status: {
+//         type: String,
+//         required: true,
+//         default: "active", // Use "active" or "inactive"
+//     },
+    
+//     CreatedBy: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'users',
+//         required: true,
+//     },
+    
+
+// });
+
+// const Trip = mongoose.model('Trip', tripSchema);
+// module.exports = Trip;
+
+
 const mongoose = require('mongoose');
+
 const tripSchema = new mongoose.Schema({
-
-    CreatedBy: {
-        type:String,
-    },
-
     TripTitle: {
         type: String,
     },
@@ -19,7 +69,7 @@ const tripSchema = new mongoose.Schema({
     },
     Date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     Hotels: {
         type: String,
@@ -28,32 +78,27 @@ const tripSchema = new mongoose.Schema({
         type: String,
     },
     TripAmount: {
-        type: String,
+        type: Number,  // Updated to Number
     },
     TripDiscountAmount: {
-        type: String,
+        type: Number,  // Updated to Number
     },
     TripFile: {
-        type: String
+        type: String,
     },
-
     status: {
         type: String,
         required: true,
-        default: "active", // Use "active" or "inactive"
+        default: "active",
     },
-    
-
     CreatedBy: {
-        type: mongoose.Types.ObjectId,
-        ref: 'users',
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'user',  
+        // Ensure 'users' matches your user model name
+        // required: true,
+        type: String,
     },
-    
-
-
-
 });
 
 const Trip = mongoose.model('Trip', tripSchema);
 module.exports = Trip;
-

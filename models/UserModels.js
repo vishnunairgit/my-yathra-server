@@ -12,7 +12,9 @@ const userSchema = mongoose.Schema({
    
     Email: {
         type: String,
-        required: true
+        required: true,
+        unique: true, // Ensures email is unique
+
     },
     Phonenumber: {
         type: String,
@@ -51,5 +53,5 @@ const userSchema = mongoose.Schema({
     },
 });
 
-const users = mongoose.model('users', userSchema)
-module.exports = users
+const User = mongoose.model('User', userSchema); // Updated to singular, capitalized form
+module.exports = User;

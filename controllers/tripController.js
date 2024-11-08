@@ -7,60 +7,61 @@ const mongoose = require('mongoose');
 // Add Trip
 
 
+// exports.Addtrip = async (req, res) => {
+//     try {
+//         const {
+//             CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status,
+//         } = req.body;
+
+
+
+
+//         const newTrip = new TRIPS({
+//             CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status, 
+//         });
+
+//         await newTrip.save();
+
+//         console.log(newTrip);
+
+
+//         res.status(201).json({ message: 'Trip data Added successfully', job: newTrip });
+
+//     } catch (error) {
+//         console.log(error);
+
+//         if (!res.headersSent) {
+//             res.status(500).json({ message: 'Internal Server Error' });
+//         }
+//     }
+// };
+
+
 exports.Addtrip = async (req, res) => {
     try {
-        const {
-            CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status,
-        } = req.body;
-
-
-        const { TripFile} = req.files;
-
-        let tripFileName = '';
-
-
-        if (TripFile && TripFile[0]) {
-            tripFileName = TripFile[0].filename; // Get filename from uploaded file
-        }
-
-        const createdById = mongoose.Types.ObjectId(CreatedBy);
-
-
-
-        // let TripFile = null; // Initialize TripFile to null
-
-        // if (req.files && req.files.TripFile && req.files.TripFile[0]) {
-        //     TripFile = req.files.TripFile[0].filename; // Set TripFile if it exists
-        // }
-
-
-
-       
-
-        // let tripFileName = '';
-
-        // if (req.files && TripFile && TripFile[0]) {
-        //     tripFileName = TripFile[0].filename; // Store the filename directly
-        // }
-
-
+        const { CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, Date } = req.body;
+        
+        // Create a new trip object with form data
         const newTrip = new TRIPS({
-            CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, status, TripFile:tripFileName, 
+            CreatedBy,
+            TripTitle,
+            TripLocations,
+            TripDuration,
+            Flights,
+            Hotels,
+            Activities,
+            TripAmount,
+            TripDiscountAmount,
+            Date,
+            // TripFile: req.file ? req.file.path : null, // Save file path if uploaded
         });
 
         await newTrip.save();
 
-        console.log(newTrip);
-
-
-        res.status(201).json({ message: 'trip data Added successfully', job: newTrip });
-
+        res.json({ message: 'Trip data Added successfully' });
     } catch (error) {
-        console.log(error);
-
-        if (!res.headersSent) {
-            res.status(500).json({ message: 'Internal Server Error' });
-        }
+        console.error("Error while adding trip:", error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 };
 
