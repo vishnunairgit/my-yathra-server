@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
 
-    UserName: {
-        type: String,
-        required: true
-    },
+    // UserName: {
+    //     type: String,
+    //     required: true
+    // },
     CompanyName: {
         type: String,
     },
@@ -14,34 +14,40 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true, // Ensures email is unique
-
     },
+
     Phonenumber: {
         type: String,
         required: true
     },
+
     Address: {
         type: String,
     },
-    Website: {
+
+    Instagram: {
         type: String
     },
-    LinkedIn: {
+
+    FaceBook: {
         type: String
     },
-    Industry: {
-        type: String
-    },
+
+    // Industry: {
+    //     type: String
+    // },
  
     About: {
         type: String,
     },
+
     Logo: {
         type: String,
     },
     Image: {
         type: String,
     },
+    
     Role: {
         type: Number,
         required: true,
