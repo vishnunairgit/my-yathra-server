@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 
 const companySchema = mongoose.Schema({
 
-    UserName: {
-        type: String,
-        required: true
-    },
 
     CompanyName: {
         type: String,
@@ -34,9 +30,6 @@ const companySchema = mongoose.Schema({
         type: String
     },
 
-    // Industry: {
-    //     type: String
-    // },
  
     About: {
         type: String,
@@ -45,6 +38,7 @@ const companySchema = mongoose.Schema({
     Logo: {
         type: String,
     },
+    
     Image: {
         type: String,
     },

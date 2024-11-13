@@ -11,6 +11,10 @@ const fileStorage = multer.diskStorage({
 
 const upload = multer({ storage: fileStorage }).fields([
     { name: 'TripFile', maxCount: 1 },
+    { name: 'logoFile', maxCount: 1 },
+    { name: 'imageFile', maxCount: 1 },
+
+
 
 ]);
 
