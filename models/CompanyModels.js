@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 
-const userSchema = mongoose.Schema({
+const companySchema = mongoose.Schema({
 
-    // UserName: {
-    //     type: String,
-    //     required: true
-    // },
+    UserName: {
+        type: String,
+        required: true
+    },
+
     CompanyName: {
         type: String,
     },
@@ -59,5 +60,5 @@ const userSchema = mongoose.Schema({
     },
 });
 
-const User = mongoose.model('User', userSchema); // Updated to singular, capitalized form
+const User = mongoose.model('User', companySchema); // Updated to singular, capitalized form
 module.exports = User;
