@@ -29,6 +29,9 @@ const tripSchema = new mongoose.Schema({
     TripDiscountAmount: {
         type: Number,  // Updated to Number
     },
+    TripType: {
+        type: String,
+    },
     TripFile: {
         type: String,
     },

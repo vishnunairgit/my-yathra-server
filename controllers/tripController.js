@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 exports.Addtrip = async (req, res) => {
     try {
-        const { CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, Date, } = req.body;
-        
+        const { CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount,TripType, Date, } = req.body;
+
         const newTrip = new TRIPS({
             CreatedBy,
             TripTitle,
@@ -15,6 +15,7 @@ exports.Addtrip = async (req, res) => {
             Activities,
             TripAmount,
             TripDiscountAmount,
+            TripType,
             Date,
             TripFile: req.files && req.files.TripFile ? req.files.TripFile[0].path : null,
         });
@@ -52,3 +53,69 @@ exports.GetTrips = async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 };
+
+
+
+exports.GetSingleTrip = async (req, res) => {
+
+    const { tripId } = req.params;
+
+    console.log(tripId, '--------tripIdBE--------------');
+
+    try {
+        const trip = await TRIPS.findById(tripId);
+
+        if (!trip) {
+            return res.status(404).json({ error: 'Trip not found' });
+        }
+        res.status(200).json(trip);
+        console.log(trip);
+
+    } catch (error) {
+        console.error("Error fetching single trip:", error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+
+exports.EditTrip = async (req, res) => {
+
+    const { tripId } = req.params;
+    const updateTrip = req.body;
+
+    console.log(tripId, '-----------tripid--------');
+    console.log(updateTrip, "------updatedata----------");
+
+    try {
+
+        if (req.files && req.files.TripFile) {
+            updateTrip.TripFile = req.files.TripFile[0].path; // Handle file path correctly
+        }
+        const trip = await TRIPS.findByIdAndUpdate(tripId, updateTrip, { new: true })
+        if (!trip) {
+            return res.status(400).json({ message: "Trip not fount" })
+        }
+        res.status(200).json({ message: "Trip data Updated successfully", trip });
+        console.log(trip);
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating job', error });
+
+    }
+
+}
+
+
+exports.DeleteTrip = async (req, res) => {
+    const { tripId } = req.params;
+    try {
+        const Trip = await TRIPS.findByIdAndDelete(tripId);
+        if (!Trip) {
+            return res.status(404).json({ message: "Trip not found" })
+        }
+        res.status(200).json({ message: 'Trip deleted successfully' });
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting job', error });
+    }
+}
