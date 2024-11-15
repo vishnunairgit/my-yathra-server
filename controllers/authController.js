@@ -12,10 +12,10 @@ const register = async (req, res) => {
         }
 
         // Check if username is already taken
-        const existingUserName = await COMPANY.findOne({ UserName: req.body.UserName });
-        if (existingUserName) {
-            return res.status(409).json({ message: 'Username is already taken' });
-        }
+        // const existingUserName = await COMPANY.findOne({ UserName: req.body.UserName });
+        // if (existingUserName) {
+        //     return res.status(409).json({ message: 'Username is already taken' });
+        // }
 
         // Check if phone number is already registered
         const existingPhoneNumber = await COMPANY.findOne({ Phonenumber: req.body.Phonenumber });
@@ -24,26 +24,22 @@ const register = async (req, res) => {
         }
 
         // Check if registration number is already registered
-        const existingRegistrationNumber = await COMPANY.findOne({ RegistrationNumber: req.body.RegistrationNumber });
-        if (existingRegistrationNumber) {
-            return res.status(409).json({ message: 'RegistrationNumber is already registered' });
-        }
+        // const existingRegistrationNumber = await COMPANY.findOne({ RegistrationNumber: req.body.RegistrationNumber });
+        // if (existingRegistrationNumber) {
+        //     return res.status(409).json({ message: 'RegistrationNumber is already registered' });
+        // }
 
         // Hash the password before saving it to the database
         const hash = await bcryptjs.hash(req.body.password, saltRounds);
 
         // Create a new user instance
         const newcompany = new COMPANY({
-            UserName: req.body.UserName,
             CompanyName: req.body.CompanyName,
-            RegistrationNumber: req.body.RegistrationNumber,
             Email: req.body.Email,
             Phonenumber: req.body.Phonenumber,
             Address: req.body.Address,
-            Website: req.body.Website,
-            LinkedIn: req.body.LinkedIn,
-            Industry: req.body.Industry,
-            Incorporationdate: req.body.Incorporationdate,
+            Instagram: req.body.Instagram,
+            FaceBook: req.body.FaceBook,
             About: req.body.About,
             Role:req.body.Role,
             LogoUpload: req.body.logoUpload,

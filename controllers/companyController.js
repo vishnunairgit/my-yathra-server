@@ -7,22 +7,16 @@ exports.GetMycompany  = async (req, res) => {
     const userId = req.headers.userid;
     console.log(userId,'-----------userId------------');
     
-
     try {
         if (!userId) {
             return res.status(400).json({ error: 'UserId is required' });
         }
-
         // Find the company by userId (if userId is a field in the schema)
         const company = await COMPANY.findOne({ _id: userId });
-
         if (!company) {
             return res.status(404).json({ error: 'Company not found' });
         }
-
         console.log(company);
-        
-
         res.status(200).json(company);
 
     } catch (error) {
@@ -44,10 +38,10 @@ exports.UpdateCompany = async (req, res) =>{
 
             if (req.files) {
                 if (logoFile && logoFile[0]) {
-                    userData.Logo = logoFile[0].filename;
+                    userData.logoFile = logoFile[0].filename;
                 }
                 if (imageFile && imageFile[0]) {
-                    userData.Image = imageFile[0].filename;
+                    userData.imageFile = imageFile[0].filename;
                 }
             }
     

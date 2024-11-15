@@ -35,7 +35,7 @@ exports.Addtrip = async (req, res) => {
 exports.GetTrips = async (req, res) => {
     try {
         // Fetch trips and populate the 'CreatedBy' field (user details)
-        const Trips = await TRIPS.find().populate('CreatedBy', 'UserName Email'); // Optional: specify the fields to populate
+        const Trips = await TRIPS.find().populate('CreatedBy', ' Email Phonenumber Address image logo About FaceBook  Instagram CompanyName '); // Optional: specify the fields to populate
 
         // Log the trips data to ensure you're fetching the correct data
         console.log(Trips);
