@@ -38,10 +38,10 @@ exports.UpdateCompany = async (req, res) =>{
 
             if (req.files) {
                 if (logoFile && logoFile[0]) {
-                    userData.logoFile = logoFile[0].filename;
+                    userData.logo = logoFile[0].filename;
                 }
                 if (imageFile && imageFile[0]) {
-                    userData.imageFile = imageFile[0].filename;
+                    userData.image = imageFile[0].filename;
                 }
             }
     

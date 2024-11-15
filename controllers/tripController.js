@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 exports.Addtrip = async (req, res) => {
     try {
-        const { CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount,TripType, Date, } = req.body;
+        const { CreatedBy, TripTitle, TripLocations, TripDuration, Flights, Hotels, Activities, TripAmount, TripDiscountAmount, TripType, Date, } = req.body;
 
         const newTrip = new TRIPS({
             CreatedBy,
