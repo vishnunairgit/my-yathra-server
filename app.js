@@ -18,7 +18,8 @@ console.log(process.env.JWT_PASSWORD, "-----jwt password-----");
 // Route imports
 const authRouter = require('./routes/authRouter'); 
 const tripRouter = require('./routes/tripRouter'); 
-const companyRouter = require('./routes/companyRouter')
+const companyRouter = require('./routes/companyRouter');
+const BookNow = require('./routes/bookNow')
 
 
 const  app = express();
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(authRouter);
 app.use(tripRouter);
 app.use(companyRouter);
+app.use(BookNow);
 
 
 

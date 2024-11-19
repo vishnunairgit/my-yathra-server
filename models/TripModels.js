@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose');
 const tripSchema = new mongoose.Schema({
+    
     TripTitle: {
         type: String,
     },
@@ -42,7 +43,7 @@ const tripSchema = new mongoose.Schema({
     },
     CreatedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',  
+        ref: 'User',
         // Ensure 'users' matches your user model name
         required: true,
         // type: String,
