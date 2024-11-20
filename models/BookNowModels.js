@@ -1,21 +1,13 @@
 const mongoose = require('mongoose')
 
-const bookNowSchema = mongoose.Schema({
-    Name: {
-        type: String,
-    },
-    Email: {
-        type: String,
-    },
-    Number: {
-        type: String,
-        required: true,
-    },
-    Date: {
-        type: Date,
-        default: Date.now,
-    },
-});
 
-const BookNow = mongoose.model('BookNow', bookNowSchema);
-module.exports = BookNow;
+const bookNowSchema = new mongoose.Schema({
+    UserName: String,
+    UserPhoneNumber: { type: String, unique: true },
+    userEmail: { type: String }, // Update field name to match request body
+    Date: Date,
+  });
+
+const BOOKNOW = mongoose.model('BookNow', bookNowSchema);
+
+module.exports = BOOKNOW;

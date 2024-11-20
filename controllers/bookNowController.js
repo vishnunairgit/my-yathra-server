@@ -1,76 +1,80 @@
-// const mongoose = require('mongoose');
-// const BOOKNOW = require('../models/BookNowModels')
-
-// exports.BookNow = async (req, res) => {
-//     try {
-//         const { Name, PhoneNumber, Email, Date } = req.body;
-
-//         console.log(req.body);
-        
-
-//         // Validate if PhoneNumber is provided
-//         if (!PhoneNumber) {
-//             return res.status(400).json({ message: "Phone number is required." });
-//         }
-
-//         // Check if the PhoneNumber already exists
-//         const existingBooking = await BOOKNOW.findOne({ PhoneNumber });
-//         if (existingBooking) {
-//             return res.status(400).json({ message: "Phone number must be unique." });
-//         }
-
-//         // Create new booking
-//         const newBookNow = new BOOKNOW({
-//             Name,
-//             PhoneNumber,
-//             Email,
-//             Date,
-//         });
-
-//         await newBookNow.save();
-
-//         console.log(newBookNow);
-//         res.json({ message: 'Booking successfully', newBookNow });
-//     } catch (error) {
-//         console.error("Error while Booking:", error);
-
-//         // If the error is related to unique constraint, catch it
-//         if (error.code === 11000) {
-//             return res.status(400).json({ message: "Phone number must be unique." });
-//         }
-
-//         res.status(500).json({ message: 'Internal Server Error' });
-//     }
-// };
-
-
-
-const express = require('express');
-const router = express.Router();
+const mongoose = require('mongoose');
 const BOOKNOW = require('../models/BookNowModels')
 
 exports.BookNow = async (req, res) => {
-    const { Name, Number, Email, Date } = req.body;
+    try {
+        const { UserName, UserPhoneNumber, userEmail, Date  } = req.body;
+        console.log(req.body,"-----userdata");
+        
+        // Create new booking
+        const newBooing = new BOOKNOW({
+            UserName,
+            UserPhoneNumber,
+            userEmail,
+            Date,
+        });
 
-  try {
-    // Check if the phone number already exists
-    const existingBooking = await BOOKNOW.findOne({ Number });
+        await newBooing.save();
+        res.status(201).json({ message: 'Booking successfully', newBooing });
 
-    if (existingBooking) {
-      return res.status(400).json({ message: "Phone number must be unique." });
+        console.log(newBooing,"----------new boking---------------");
+
+    } catch (error) {
+        console.error("Error while Booking:", error);
+
+        // If the error is related to unique constraint, catch it
+        if (error.code === 11000) {
+            return res.status(400).json({ message: "Phone number must be unique." });
+        }
+
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-    const Booking = new BOOKNOW({
-      Name,
-      Number,
-      Email,
-      Date,
-    });
-
-    await Booking.save();
-    res.status(200).json({ message: "Booking successful!",Booking });
-  } catch (error) {
-    console.error("Error booking:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
 };
+
+
+
+// const mongoose = require('mongoose');
+// const BOOKNOW = require('../models/BookNowModels');
+
+// exports.BookNow = async (req, res) => {
+//   try {
+//     const { UserName, UserPhoneNumber, userEmail, Date } = req.body;
+//     console.log(req.body,"--------req.body-------");
+    
+
+//     // Validate request body
+//     // const validationError = validateBooking(req.body);
+//     // if (validationError) {
+//     //   return res.status(400).json({ message: validationError });
+//     // }
+
+//     // Create new booking
+//     const newBooking = new BOOKNOW({
+//       UserName,
+//       UserPhoneNumber,
+//       userEmail,
+//       Date,
+//     });
+
+//     await newBooking.save();
+//     console.log(newBooking,"00000000000000000");
+    
+
+//     res.status(201).json({ message: 'Booking successful', newBooking });
+//   } catch (error) {
+//     console.error('Error while Booking:', error);
+
+//     // Mongoose validation error
+//     if (error.name === 'ValidationError') {
+//       return res.status(400).json({ message: 'Invalid request data' });
+//     }
+
+//     // Unique constraint error
+//     if (error.code === 11000) {
+//       return res.status(400).json({ message: 'Phone number must be unique' });
+//     }
+
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// };
 
