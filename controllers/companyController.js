@@ -3,10 +3,10 @@ const COMPANY = require('../models/CompanyModels');
 const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 
-exports.GetMycompany  = async (req, res) => {
+exports.GetMycompany = async (req, res) => {
     const userId = req.headers.userid;
-    console.log(userId,'-----------userId------------');
-    
+    console.log(userId, '-----------userId------------');
+
     try {
         if (!userId) {
             return res.status(400).json({ error: 'UserId is required' });
@@ -25,7 +25,7 @@ exports.GetMycompany  = async (req, res) => {
     }
 };
 
-exports.UpdateCompany = async (req, res) =>{
+exports.UpdateCompany = async (req, res) => {
     const userId = req.params.userId;
     const userData = req.body;
 
@@ -34,25 +34,24 @@ exports.UpdateCompany = async (req, res) =>{
         console.log("Received user data:", userData);
         console.log("Received files:", req.files);
         // handle file uploads
-        const { logoFile, imageFile} = req.files;
+        const { logoFile, imageFile } = req.files;
 
-            if (req.files) {
-                if (logoFile && logoFile[0]) {
-                    userData.logo = logoFile[0].filename;
-                }
-                if (imageFile && imageFile[0]) {
-                    userData.image = imageFile[0].filename;
-                }
+        if (req.files) {
+            if (logoFile && logoFile[0]) {
+                userData.logo = logoFile[0].filename;
             }
-    
-        // Update user in the database
+            if (imageFile && imageFile[0]) {
+                userData.image = imageFile[0].filename;
+            }
+        }
 
-        const updateUser = await USER.findByIdAndUpdate(userId, userData, { new: true });
+
+        const updateUser = await COMPANY.findByIdAndUpdate(userId, userData, { new: true });
         if (!updateUser) {
             return res.status(400).json({ message: 'user not fount' })
         }
         res.status(200).json(updateUser)
-        console.log(updateUser,'------------');
+        console.log(updateUser, '------------');
 
     } catch (error) {
         res.status(500).json({ message: 'Error updating user', error });

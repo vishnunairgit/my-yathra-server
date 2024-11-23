@@ -20,6 +20,7 @@ const authRouter = require('./routes/authRouter');
 const tripRouter = require('./routes/tripRouter'); 
 const companyRouter = require('./routes/companyRouter');
 const BookNow = require('./routes/bookNow')
+const notificationRouter = require('./routes/notificationRouter')
 
 
 const  app = express();
@@ -46,6 +47,7 @@ app.use(authRouter);
 app.use(tripRouter);
 app.use(companyRouter);
 app.use(BookNow);
+app.use(notificationRouter);
 
 
 
