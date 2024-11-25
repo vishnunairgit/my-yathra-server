@@ -43,7 +43,7 @@ const tripSchema = new mongoose.Schema({
     },
     CreatedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Company',
         // Ensure 'users' matches your user model name
         required: true,
         // type: String,

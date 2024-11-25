@@ -6,7 +6,7 @@ const NOTIFICATION = require("../models/Notification")
 
 exports.BookNow = async (req, res) => {
     try {
-        const { UserName, UserPhoneNumber, userEmail, Date: bookingDate   } = req.body;
+        const { UserName, UserPhoneNumber, userEmail, Date: bookingDate } = req.body;
         // console.log(req.body,"-----userdata");
         
         // Create new booking

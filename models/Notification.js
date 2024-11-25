@@ -11,7 +11,7 @@ const notificationSchema = new mongoose.Schema({
     },
     companies: [{ 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User', // Assuming your company collection is named 'Company'
+        ref: 'Company', // Assuming your company collection is named 'Company'
         required: true 
     }],
     Date: { 

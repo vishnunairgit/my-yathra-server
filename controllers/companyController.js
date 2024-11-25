@@ -4,19 +4,19 @@ const bcryptjs = require('bcryptjs');
 const saltRounds = 10;
 
 exports.GetMycompany = async (req, res) => {
-    const userId = req.headers.userid;
-    console.log(userId, '-----------userId------------');
+    const companyId = req.headers.companyid;
+    // console.log(companyId, '-----------companyId------------');
 
     try {
-        if (!userId) {
-            return res.status(400).json({ error: 'UserId is required' });
+        if (!companyId) {
+            return res.status(400).json({ error: 'companyId is required' });
         }
-        // Find the company by userId (if userId is a field in the schema)
-        const company = await COMPANY.findOne({ _id: userId });
+        // Find the company by companyId (if companyId is a field in the schema)
+        const company = await COMPANY.findOne({ _id: companyId });
         if (!company) {
             return res.status(404).json({ error: 'Company not found' });
         }
-        console.log(company);
+        // console.log(company);
         res.status(200).json(company);
 
     } catch (error) {
@@ -26,8 +26,11 @@ exports.GetMycompany = async (req, res) => {
 };
 
 exports.UpdateCompany = async (req, res) => {
-    const userId = req.params.userId;
+    const companyId = req.params.companyId;
     const userData = req.body;
+
+    // console.log(req.body,"edit company----");
+    
 
     // handle file uploads
     try {
@@ -38,20 +41,19 @@ exports.UpdateCompany = async (req, res) => {
 
         if (req.files) {
             if (logoFile && logoFile[0]) {
-                userData.logo = logoFile[0].filename;
+                userData.logoFile = logoFile[0].filename;
             }
             if (imageFile && imageFile[0]) {
-                userData.image = imageFile[0].filename;
+                userData.imageFile = imageFile[0].filename;
             }
         }
 
-
-        const updateUser = await COMPANY.findByIdAndUpdate(userId, userData, { new: true });
+        const updateUser = await COMPANY.findByIdAndUpdate(companyId, userData, { new: true });
         if (!updateUser) {
             return res.status(400).json({ message: 'user not fount' })
         }
         res.status(200).json(updateUser)
-        console.log(updateUser, '------------');
+        // console.log(updateUser, '------------');
 
     } catch (error) {
         res.status(500).json({ message: 'Error updating user', error });
@@ -60,17 +62,17 @@ exports.UpdateCompany = async (req, res) => {
 }
 
 exports.UpdateCompanyPassword = async (req, res) => {
-    const userId = req.params.userId;
+    const companyId = req.params.companyId;
     const { currentPassword, newPassword } = req.body;
 
     try {
-        const user = await COMPANY.findById(userId);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        const company = await COMPANY.findById(companyId);
+        if (!company) {
+            return res.status(404).json({ message: 'company not found' });
         }
 
         // Verify current password
-        const isPasswordValid = await bcryptjs.compare(currentPassword, user.password);
+        const isPasswordValid = await bcryptjs.compare(currentPassword, company.password);
         if (!isPasswordValid) {
             return res.status(400).json({ message: 'Current password is incorrect' });
         }
@@ -78,10 +80,10 @@ exports.UpdateCompanyPassword = async (req, res) => {
         // Hash the new password
         const saltRounds = 10;
         const hashedPassword = await bcryptjs.hash(newPassword, saltRounds);
-        user.password = hashedPassword;
+        company.password = hashedPassword;
 
         // Save the updated user
-        await user.save();
+        await company.save();
 
         res.status(200).json({ message: 'Password updated successfully' });
     } catch (error) {

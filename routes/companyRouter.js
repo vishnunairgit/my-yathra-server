@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const companyController = require('../controllers/companyController');
 const upload = require('../config/multerConfig');
+const { adminAuth } = require('../Middlewares/Authorization');
 
 
 
 
 router.get('/GetMycompany', companyController.GetMycompany);
-router.put('/UpdateCompany/:userId',upload, companyController.UpdateCompany);
-router.put('/UpdateCompanyPassword/:userId', companyController.UpdateCompanyPassword)
+router.put('/UpdateCompany/:companyId', adminAuth ,upload, companyController.UpdateCompany);
+router.put('/UpdateCompanyPassword/:companyId', adminAuth, companyController.UpdateCompanyPassword)
 
 
 

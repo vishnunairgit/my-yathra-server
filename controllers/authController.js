@@ -11,23 +11,11 @@ const register = async (req, res) => {
             return res.status(409).json({ message: 'Email is already registered' });
         }
 
-        // Check if username is already taken
-        // const existingUserName = await COMPANY.findOne({ UserName: req.body.UserName });
-        // if (existingUserName) {
-        //     return res.status(409).json({ message: 'Username is already taken' });
-        // }
-
         // Check if phone number is already registered
         const existingPhoneNumber = await COMPANY.findOne({ Phonenumber: req.body.Phonenumber });
         if (existingPhoneNumber) {
             return res.status(409).json({ message: 'Phone number is already registered' });
         }
-
-        // Check if registration number is already registered
-        // const existingRegistrationNumber = await COMPANY.findOne({ RegistrationNumber: req.body.RegistrationNumber });
-        // if (existingRegistrationNumber) {
-        //     return res.status(409).json({ message: 'RegistrationNumber is already registered' });
-        // }
 
         // Hash the password before saving it to the database
         const hash = await bcryptjs.hash(req.body.password, saltRounds);
@@ -42,8 +30,8 @@ const register = async (req, res) => {
             FaceBook: req.body.FaceBook,
             About: req.body.About,
             Role:req.body.Role,
-            LogoUpload: req.body.logoUpload,
-            ImageUpload: req.body.imageUpload,
+            logoFile: req.body.logoFile,
+            imageFile: req.body.imageFile,
             password: hash,
         });
 
@@ -58,10 +46,10 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const { UserName, password } = req.body;
+        const { Email, password } = req.body;
 
         // Find user by UserName in the database
-        const company = await COMPANY.findOne({ UserName });
+        const company = await COMPANY.findOne({ Email });
 
         if (!company) {
             return res.status(401).json({ message: 'Invalid User Name or password' });
@@ -75,7 +63,7 @@ const login = async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ userId: company._id, Role:company?.Role }, process.env.JWT_PASSWORD, { expiresIn: '3h' });
+        const token = jwt.sign({ companyId: company?._id, Role:company?.Role }, process.env.JWT_PASSWORD, { expiresIn: '3h' });
 
         // Return success message and token
         res.status(200).json({ message: 'Login successful', token });
