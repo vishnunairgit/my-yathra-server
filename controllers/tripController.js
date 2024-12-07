@@ -34,17 +34,13 @@ exports.GetTrips = async (req, res) => {
     try {
         // Fetch trips and populate the 'CreatedBy' field (user details)
         const Trips = await TRIPS.find().populate('CreatedBy', 'Email Phonenumber Address  About FaceBook  Instagram CompanyName '); // Optional: specify the fields to populate
-
         // Log the trips data to ensure you're fetching the correct data
         // console.log(Trips);
-
         if (!Trips || Trips.length === 0) {
             return res.status(404).json({ error: 'Trips not found' });
         }
-
         // Send the trips data as the response
         res.status(200).json(Trips);
-
     } catch (error) {
         // Log the error with more context for better debugging
         console.error("Error fetching trips: ", error);

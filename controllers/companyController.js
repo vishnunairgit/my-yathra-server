@@ -28,10 +28,7 @@ exports.GetMycompany = async (req, res) => {
 exports.UpdateCompany = async (req, res) => {
     const companyId = req.params.companyId;
     const userData = req.body;
-
-    // console.log(req.body,"edit company----");
     
-
     // handle file uploads
     try {
         console.log("Received user data:", userData);

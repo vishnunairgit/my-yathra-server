@@ -18,12 +18,8 @@ exports.BookNow = async (req, res) => {
         });
         await newBooking.save();
 
-
         const company = await COMPANY.find({ Role: "1" });
-        
-        
         const companyIds = company.map(company => company._id);
-
 
         const notification = new NOTIFICATION({
             title: 'New Booking',
