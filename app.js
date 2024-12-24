@@ -25,8 +25,10 @@ const notificationRouter = require('./routes/notificationRouter')
 
 const  app = express();
 
-// Database connection
-connectToDatabase()
+// Initialize database connection
+connectToDatabase();
+
+// connectToDatabase()
 
 app.use(cors());
 app.use(logger('dev'));
