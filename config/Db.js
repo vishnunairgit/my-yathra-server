@@ -1,4 +1,5 @@
-require('dotenv').config(); // Load environment variables from .env file
+// require('dotenv').config(); 
+// Load environment variables from .env file
 // const mongoose = require('mongoose');
 
 // const connectToDatabase = async () => {
@@ -17,47 +18,30 @@ require('dotenv').config(); // Load environment variables from .env file
 // module.exports = connectToDatabase;
 
 
-// const mongoose = require('mongoose');
-
-// const connectToDatabase = async () => {
-//     try {
-//         await mongoose.connect('mongodb+srv://infovishnuac:AASBdSpGdyToufQZ@myyathra.gklkj.mongodb.net/<database>', {
-//             useNewUrlParser: true,
-//             useUnifiedTopology: true,
-//         });
-//         console.log('Connected to MongoDB');
-//     } catch (error) {
-//         console.error('Error connecting to MongoDB:', error);
-//         process.exit(1);
-//     }
-// };
-
-// module.exports = connectToDatabase;
 
 
 
-// require('dotenv').config(); // Load environment variables from .env file
+// require('dotenv').config(); 
 // const mongoose = require('mongoose');
 
 // // Function to connect to MongoDB
 // const connectToDatabase = async () => {
 //     try {
-//         const dbUrl = process.env.MONGODB_URL;
-        
-//         if (!dbUrl) {
-//             throw new Error('MONGODB_URL is not defined in the environment variables.');
-//         }
+//         // Connection URL (read from environment variables for security)
+//         // const dbURI = 'mongodb+srv://infovishnuac:AASBdSpGdyToufQZ@myyathra.gklkj.mongodb.net/myyathra?retryWrites=false&w=majority';
 
-//         // Connecting to MongoDB
+//         const dbUrl = process.env.MONGODB_URL || 'mongodb+srv://infovishnuac:AASBdSpGdyToufQZ@myyathra.gklkj.mongodb.net/?retryWrites=true&w=majority&appName=myyathra';
+
+//         // Connect to MongoDB
 //         await mongoose.connect(dbUrl, {
-//             useNewUrlParser: true,
-//             useUnifiedTopology: true,
+//             // useNewUrlParser: true,
+//             // useUnifiedTopology: true,
 //         });
 
 //         console.log('MongoDB connected successfully');
 //     } catch (error) {
 //         console.error('Error connecting to MongoDB:', error.message);
-//         process.exit(1); // Exit the process with failure
+//         process.exit(1); // Exit process with failure
 //     }
 // };
 
@@ -65,14 +49,17 @@ require('dotenv').config(); // Load environment variables from .env file
 
 
 
-require('dotenv').config(); // Load environment variables from .env file
+
+require('dotenv').config(); 
 const mongoose = require('mongoose');
 
 // Function to connect to MongoDB
 const connectToDatabase = async () => {
     try {
         // Connection URL (read from environment variables for security)
-        const dbUrl = process.env.MONGODB_URL || 'mongodb+srv://infovishnuac:AASBdSpGdyToufQZ@myyathra.gklkj.mongodb.net/?retryWrites=true&w=majority&appName=myyathra';
+        const dbUrl = 'mongodb+srv://infovishnuac:AASBdSpGdyToufQZ@myyathra.gklkj.mongodb.net/myyathra?retryWrites=false&w=majority';
+
+        // const dbUrl = process.env.MONGODB_URL || 'mongodb+srv://infovishnuac:AASBdSpGdyToufQZ@myyathra.gklkj.mongodb.net/?retryWrites=true&w=majority&appName=myyathra';
 
         // Connect to MongoDB
         await mongoose.connect(dbUrl, {
@@ -88,4 +75,6 @@ const connectToDatabase = async () => {
 };
 
 module.exports = connectToDatabase;
+
+
 
