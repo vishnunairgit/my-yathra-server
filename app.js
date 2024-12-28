@@ -26,6 +26,8 @@ const notificationRouter = require('./routes/notificationRouter')
 const  app = express();
 
 // Initialize database connection
+
+
 connectToDatabase();
 
 // connectToDatabase()
