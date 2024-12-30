@@ -7,6 +7,7 @@ const connectToDatabase = async () => {
         if (!dbUrl) {
             throw new Error('MONGODB_URL is not defined in the environment variables.');
         }
+        
         const connection = await mongoose.connect(dbUrl);
         console.log('my yathra MongoDB connected');
     } catch (error) {
